@@ -44,6 +44,7 @@ export async function GET(
         currentValue: dbEvent.currentValue,
         currency: dbEvent.currency,
         imageSrc: dbEvent.imageSrc,
+        status: dbEvent.status,
         nfts: nfts,
       },
       { status: 200 },

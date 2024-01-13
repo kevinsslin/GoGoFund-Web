@@ -21,6 +21,8 @@ export type CardListProps = {
   money: number;
   person: number;
   time: number;
+  isFulfilled: boolean;
+  isPending: boolean;
 };
 
 export default function EventCard({
@@ -31,6 +33,8 @@ export default function EventCard({
   money,
   person,
   time,
+  isFulfilled,
+  isPending,
 }: CardListProps) {
   const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
     width: "100%",
@@ -72,6 +76,14 @@ export default function EventCard({
           <p className="text-light-blue">{progess}%</p>
         </div>
         <div className="flex flex-row items-center justify-end pb-2">
+          {isFulfilled && (
+            <Typography className="bg-green p-2 font-bold">
+              Fulfilled
+            </Typography>
+          )}
+          {isPending && (
+            <Typography className="bg-yellow p-2 font-bold">pending</Typography>
+          )}
           <AiOutlineUser className="text-dark-blue" />
           <p className="p-2 font-bold text-dark-blue">{person} people</p>
           <AiOutlineFieldTime className="text-dark-blue" />

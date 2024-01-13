@@ -1,14 +1,20 @@
 "use client";
 
 // ProductPage.tsx
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import { Divider } from "@mui/material";
 
 import type { nft } from "@/lib/types/db";
 
 function ProductIntro({ nfts = [] }: { nfts: nft[] }) {
-  const [selectedProduct, setSelectedProduct] = useState<nft | null>(null);
+  const [selectedProduct, setSelectedProduct] = useState<nft | null>(
+    nfts[0] || null,
+  );
+
+  useEffect(() => {
+    setSelectedProduct(nfts[0] || null);
+  }, [nfts]);
 
   const handleSelectProduct = (product: nft) => {
     setSelectedProduct(product);

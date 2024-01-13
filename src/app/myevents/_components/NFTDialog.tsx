@@ -94,7 +94,6 @@ function GetFondDialog({ onRefresh }: NFTDialogProps) {
       if (!response.ok) {
         const errorData = await response.json();
         console.error("Error from API:", errorData.error);
-        // Handle error: Display it in UI, etc.
       } else {
         console.log("Success");
         await onRefresh();
@@ -166,7 +165,7 @@ function GetFondDialog({ onRefresh }: NFTDialogProps) {
         className="h-15 m-4 flex w-64 items-center justify-center rounded-2xl bg-dark-blue p-4 text-xl font-bold text-white"
         onClick={handleClickOpen}
       >
-        Add NFT Product
+        Add Product
       </button>
       <button
         className="h-15 m-4 flex w-64 items-center justify-center rounded-2xl bg-dark-blue p-4 text-xl font-bold text-white"
@@ -180,9 +179,9 @@ function GetFondDialog({ onRefresh }: NFTDialogProps) {
         fullWidth={true}
         maxWidth={"md"}
       >
-        <DialogTitle>Create NFT</DialogTitle>
+        <DialogTitle>Create Product</DialogTitle>
         <DialogContent className="space-y-2">
-          <InputLabel htmlFor="name">NFT Name : </InputLabel>
+          <InputLabel htmlFor="name">Product Name : </InputLabel>
           <TextField
             autoFocus
             margin="dense"

@@ -6,6 +6,7 @@ import { AiOutlineFieldTime } from "react-icons/ai";
 import Image from "next/image";
 import Link from "next/link";
 
+import Chip from "@mui/material/Chip";
 import LinearProgress, {
   linearProgressClasses,
 } from "@mui/material/LinearProgress";
@@ -21,6 +22,8 @@ export type CardListProps = {
   money: number;
   person: number;
   time: number;
+  isFulfilled: boolean;
+  isPending: boolean;
 };
 
 export default function EventCard({
@@ -31,6 +34,8 @@ export default function EventCard({
   money,
   person,
   time,
+  isFulfilled,
+  isPending,
 }: CardListProps) {
   const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
     width: "100%",
@@ -67,11 +72,15 @@ export default function EventCard({
           <BorderLinearProgress
             variant="determinate"
             className="m-2"
-            value={progess}
+            value={progess > 100 ? 100 : progess}
           />
           <p className="text-light-blue">{progess}%</p>
         </div>
         <div className="flex flex-row items-center justify-end pb-2">
+          {isFulfilled && (
+            <Chip label="fulfilled" className="mr-auto font-bold" />
+          )}
+          {isPending && <Chip label="pending" className="mr-auto font-bold" />}
           <AiOutlineUser className="text-dark-blue" />
           <p className="p-2 font-bold text-dark-blue">{person} people</p>
           <AiOutlineFieldTime className="text-dark-blue" />

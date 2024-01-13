@@ -21,6 +21,7 @@ export type allEventDto = {
   currency: string;
   imageSrc: string;
   transactionCount: number;
+  status: string;
 };
 
 export type updateEventType = {
@@ -50,6 +51,7 @@ export type eventDetailDto = {
   endDate: number; // or Date
   targetValue: number;
   currentValue: number;
+  status: string;
   currency: string;
   imageSrc: string;
   nfts: nft[]; // replace 'any' with the correct type for NFTs
@@ -81,4 +83,5 @@ export interface myCollectionEvent {
   targetValue: number;
   title: string;
   transactions: Transaction[];
+  transactionCount: number;
 }

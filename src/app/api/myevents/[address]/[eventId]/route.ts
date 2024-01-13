@@ -4,7 +4,7 @@ import { eq, and } from "drizzle-orm";
 import { z } from "zod";
 
 import { db } from "@/db";
-import { eventsTable, usersTable } from "@/db/schema";
+import { eventsTable, usersTable, nftsTable } from "@/db/schema";
 
 const updateEventRequestSchema = z.object({
   title: z.string().optional(),
@@ -89,6 +89,57 @@ export async function PUT(
       },
       { status: 200 },
     );
+  } catch (error) {
+    return NextResponse.json(
+      {
+        error: "Internal Server Error",
+      },
+      {
+        status: 500,
+      },
+    );
+  }
+}
+
+// Delete /api/myevents/:address/:eventId
+/// Delete Event
+export async function DELETE(
+  req: NextRequest,
+  {
+    params,
+  }: {
+    params: {
+      address: string;
+      eventId: string;
+    };
+  },
+) {
+  const { eventId, address } = params;
+  const { nftId } = await req.json();
+  try {
+    // Get the User
+    const dbUser = await db.query.usersTable.findFirst({
+      where: eq(usersTable.walletAddress, address),
+    });
+    if (!dbUser) {
+      return NextResponse.json({ error: "User Not Found" }, { status: 404 });
+    }
+    // Get the Event
+    const dbEvent = await db.query.eventsTable.findFirst({
+      where: and(
+        eq(eventsTable.displayId, eventId),
+        eq(eventsTable.userId, dbUser.displayId),
+        eq(eventsTable.status, "pending"),
+      ),
+    });
+    if (!dbEvent) {
+      return NextResponse.json({ error: "Event Not Found" }, { status: 404 });
+    }
+
+    // Delete the NFTs
+    await db.delete(nftsTable).where(eq(nftsTable.displayId, nftId));
+
+    return NextResponse.json({ status: 200 });
   } catch (error) {
     return NextResponse.json(
       {

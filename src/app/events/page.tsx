@@ -56,6 +56,8 @@ function EventsPage() {
                   money={e.currentValue}
                   person={e.transactionCount} // Assuming this is correct; replace with actual data if available
                   time={daysRemaining}
+                  isFulfilled={e.currentValue >= e.targetValue}
+                  isPending={e.status === "pending"}
                 />
               </Grid>
             );

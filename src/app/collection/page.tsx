@@ -3,7 +3,6 @@
 import React, { useEffect, useState } from "react";
 
 import { Divider, Grid } from "@mui/material";
-import { Button } from "@mui/material";
 import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
@@ -138,7 +137,7 @@ function CollectionPage() {
                     className="p-10"
                     key={e.displayId}
                   >
-                    <Button onClick={() => handleCardClick(e.transactions)}>
+                    <button onClick={() => handleCardClick(e.transactions)}>
                       <EventCard
                         id={e.displayId}
                         key={e.displayId}
@@ -146,10 +145,10 @@ function CollectionPage() {
                         currency={e.currency}
                         progess={progress}
                         money={e.currentValue}
-                        person={0}
+                        person={e.transactionCount}
                         time={daysRemaining}
                       />
-                    </Button>
+                    </button>
                   </Grid>
                 );
               })

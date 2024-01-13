@@ -6,14 +6,14 @@ First, our api key is only for demo test, so we provide in .env.example for quic
 
 1. install by pnpm
 
-2. run the docker and migrate 
+2. run the docker and migrate
 
 3. use pnpm run dev to start
 
-Other, 
+Other,
 
 ```bash
-copy .env.example to .env 
+copy .env.example to .env
 
 pnpm i
 
@@ -49,7 +49,6 @@ My Collection:
 左側也可以編輯個人資料
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
 
 團隊分工
 b09901063 鄭鈞元 : 後端建置、api撰寫

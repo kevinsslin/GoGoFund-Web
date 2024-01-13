@@ -139,7 +139,11 @@ function FundDialog({ eventId, poolAddress, nfts }: FundDialogProps) {
           </div>
         </DialogContent>
       </Dialog>
-      <Snackbar open={openSuccess} autoHideDuration={6000} onClose={handleSSClose}>
+      <Snackbar
+        open={openSuccess}
+        autoHideDuration={6000}
+        onClose={handleSSClose}
+      >
         <Alert onClose={handleClose} severity="success" sx={{ width: "100%" }}>
           Mint NFT success!
         </Alert>

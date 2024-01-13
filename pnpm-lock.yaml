@@ -5676,6 +5676,15 @@ packages:
     dependencies:
       undici-types: 5.26.5
 
+  /@types/nodemailer@6.4.14:
+    resolution:
+      {
+        integrity: sha512-fUWthHO9k9DSdPCSPRqcu6TWhYyxTBg382vlNIttSe9M7XfsT06y0f24KHXtbnijPGGRIcVvdKHTNikOI6qiHA==,
+      }
+    dependencies:
+      "@types/node": 20.10.5
+    dev: false
+
   /@types/normalize-package-data@2.4.4:
     resolution:
       {
@@ -13504,6 +13513,14 @@ packages:
       {
         integrity: sha512-y10wOWt8yZpqXmOgRo77WaHEmhYQYGNA6y421PKsKYWEK8aW+cqAphborZDhqfyKrbZEN92CN1X2KbafY2s7Yw==,
       }
+
+  /nodemailer@6.9.8:
+    resolution:
+      {
+        integrity: sha512-cfrYUk16e67Ks051i4CntM9kshRYei1/o/Gi8K1d+R34OIs21xdFnW7Pt7EucmVKA0LKtqUGNcjMZ7ehjl49mQ==,
+      }
+    engines: { node: ">=6.0.0" }
+    dev: false
 
   /noop-fn@1.0.0:
     resolution:

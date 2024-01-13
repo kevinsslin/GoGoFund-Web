@@ -27,6 +27,7 @@ function MyEventsIdPage() {
       const response = await fetch(`/api/events/${eventId}`);
       console.log(response);
       const data = await response.json();
+      console.log(data);
       setDbEvents(data);
     };
     fetchData();
@@ -66,15 +67,19 @@ function MyEventsIdPage() {
           <div className="flex flex-col p-2">
             <div className="flex flex-row space-x-4">
               <p className="flex items-center justify-center text-lg">
-                目標金額 NTD$
+                目標額 {dbEvents.currency} $
+                {dbEvents.status === "pending" ? (
+                  <EditValue
+                    eventId={eventId as string}
+                    eventTargetValue={dbEvents.targetValue}
+                  />
+                ) : (
+                  dbEvents.targetValue
+                )}
               </p>
-              <EditValue
-                eventId={eventId as string}
-                eventTargetValue={dbEvents.targetValue}
-              />
             </div>
             <p className="pt-2 text-lg">
-              已募集 {dbEvents.currency}$ {dbEvents.currentValue}
+              已募集 {dbEvents.currency} ${dbEvents.currentValue}
             </p>
           </div>
           <p className="p-2 text-lg">
