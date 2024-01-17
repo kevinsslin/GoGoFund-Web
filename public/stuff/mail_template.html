@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f5f5f5;
+      color: #333;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      border-radius: 5px;
+    }
+
+    h1 {
+      color: #e44d26;
+    }
+
+    p {
+      margin-bottom: 15px;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    li {
+      margin-bottom: 10px;
+    }
+
+    li::before {
+      content: '\2022'; /* 使用實心圓點作為項目符號 */
+      color: #e44d26;
+      display: inline-block;
+      width: 1em;
+      margin-left: -1em;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>訂單確認通知</h1>
+    <p>親愛的顧客，您來自 {{storeName}} 的訂單已成功接收並確認。</p>
+    <p>以下是您的訂單詳細資訊：</p>
+
+    <!-- 生成的郵件內容 -->
+    <!-- 使用 JavaScript 將郵件內容插入這裡 -->
+
+    <ul>
+      {{items}}
+    </ul>
+    
+    <p>感謝您的訂購與支持！期待您再次光臨。</p>
+  </div>
+</body>
+</html>

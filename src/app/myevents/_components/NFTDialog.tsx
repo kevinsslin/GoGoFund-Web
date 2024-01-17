@@ -121,7 +121,6 @@ function GetFondDialog({ onRefresh }: NFTDialogProps) {
       console.log("Success", data);
 
       setResultAddress(data.result?.toString() || "");
-      console.log(resultAddress);
     },
   });
 

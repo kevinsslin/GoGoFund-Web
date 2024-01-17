@@ -16,6 +16,8 @@ import {
   coreWallet,
 } from "@rainbow-me/rainbowkit/wallets";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+// import { type Chain, configureChains, createConfig, WagmiConfig, sepolia } from "wagmi";
+// import { opBNBTestnet } from "wagmi/chains";
 import { configureChains, createConfig, WagmiConfig } from "wagmi";
 import { sepolia } from "wagmi/chains";
 import { publicProvider } from "wagmi/providers/public";
@@ -24,7 +26,27 @@ import { publicEnv } from "@/lib/env/public";
 
 import Navbar from "./Navbar";
 
+// const AreonChain: Chain = {
+//   id: 462, // The chain ID of your custom chain
+//   name: 'Areon Network Testnet',
+//   network: 'Areon Network Testnet',
+//   nativeCurrency: {
+//     name: 'Areon',
+//     symbol: 'TAREA',
+//     decimals: 18,
+//   },
+//   rpcUrls: {
+//     public: {
+//       http: ['https://testnet-rpc.areon.network'],
+//     },
+//     default: {
+//       http: ['https://testnet-rpc.areon.network'],
+//     },
+//   },
+//   testnet: true,
+// };
 const { chains, publicClient, webSocketPublicClient } = configureChains(
+  // [AreonChain, opBNBTestnet],
   [sepolia],
   [publicProvider()],
 );

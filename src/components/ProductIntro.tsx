@@ -27,7 +27,7 @@ function ProductIntro({ nfts = [] }: { nfts: nft[] }) {
           <button
             key={product.displayId}
             onClick={() => handleSelectProduct(product)}
-            className="pl-2 text-4xl font-bold hover:text-dark-blue"
+            className={`pl-2 text-3xl ${selectedProduct && selectedProduct.displayId === product.displayId ? 'text-dark-blue font-bold' : ''} hover:text-light-blue`}
           >
             {product.name}
           </button>
