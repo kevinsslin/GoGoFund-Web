@@ -36,7 +36,6 @@ function a11yProps(index: number) {
 }
 
 function EventGrid({ events }: { events: allEventDto[] }) {
-  console.log(events);
   return (
     <Grid container spacing={3} direction="row" justifyContent="flex-start">
       {events && events.map(e => {
@@ -80,9 +79,9 @@ export default function EventSelect({ events }: { events: allEventDto[] }) {
     <Box sx={{ width: '100%' }}>
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-          <Tab label="Ongoing" {...a11yProps(0)} />
-          <Tab label="Upcoming" {...a11yProps(1)} />
-          <Tab label="Closed" {...a11yProps(2)} />
+          <Tab label="Ongoing" className='text-lg font-bold' {...a11yProps(0)} />
+          <Tab label="Upcoming" className='text-lg font-bold' {...a11yProps(1)} />
+          <Tab label="Closed" className='text-lg font-bold' {...a11yProps(2)} />
         </Tabs>
       </Box>
       <CustomTabPanel value={value} index={0} key="ongoing-tab">

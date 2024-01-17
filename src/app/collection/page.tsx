@@ -157,7 +157,7 @@ function CollectionPage() {
         </div>
         <UserDialog open={open} setOpen={setOpen} />
       </main>
-      <Dialog open={isDialogOpen} onClose={handleCloseDialog} maxWidth={"md"}>
+      {/* <Dialog open={isDialogOpen} onClose={handleCloseDialog} maxWidth={"md"}>
         {selectedEvent &&
           selectedEvent.map((transaction, index) => (
             <React.Fragment key={index}>
@@ -170,6 +170,39 @@ function CollectionPage() {
                 sx={{ borderWidth: 1, width: "100%" }}
               />
               <DialogContent className="space-y-2">
+                {transaction.items.map((item, index) => (
+                  <div key={index} className="flex flex-row space-x-2">
+                    <div className="flex flex-col">
+                      <p className="text-lg">{item.nft.name}</p>
+                      <p className="text-sm">Price: {item.nft.price}</p>
+                      <p className="text-sm">Amount: {item.quantity}</p>
+                    </div>
+                  </div>
+                ))}
+              </DialogContent>
+            </React.Fragment>
+          ))}
+      </Dialog> */}
+      <Dialog
+        open={isDialogOpen}
+        onClose={handleCloseDialog}
+        maxWidth={"md"}
+        PaperProps={{
+          style: { maxHeight: "75vh", overflowY: "auto" },
+        }}
+      >
+        {selectedEvent &&
+          selectedEvent.map((transaction, index) => (
+            <React.Fragment key={index}>
+              <DialogTitle>
+                {formatDate(transaction.transactionDate)}
+              </DialogTitle>
+              <Divider
+                variant="middle"
+                orientation="horizontal"
+                sx={{ borderWidth: 1, width: "100%" }}
+              />
+              <DialogContent className="space-y-2  min-h-32">
                 {transaction.items.map((item, index) => (
                   <div key={index} className="flex flex-row space-x-2">
                     <div className="flex flex-col">
