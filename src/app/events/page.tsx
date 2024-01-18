@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 
 import type { allEventDto } from "@/lib/types/db";
+
 import EventSelect from "./_components/EventSelect";
 
 function EventsPage() {
@@ -58,7 +59,7 @@ function EventsPage() {
             );
           })}
         </Grid> */}
-        <EventSelect events={dbEvents}/>
+        <EventSelect events={dbEvents} />
       </div>
     </main>
   );

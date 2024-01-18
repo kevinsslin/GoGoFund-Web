@@ -202,7 +202,7 @@ function CollectionPage() {
                 orientation="horizontal"
                 sx={{ borderWidth: 1, width: "100%" }}
               />
-              <DialogContent className="space-y-2  min-h-32">
+              <DialogContent className="min-h-32  space-y-2">
                 {transaction.items.map((item, index) => (
                   <div key={index} className="flex flex-row space-x-2">
                     <div className="flex flex-col">
