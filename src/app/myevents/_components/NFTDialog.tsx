@@ -97,9 +97,7 @@ function GetFondDialog({ onRefresh }: NFTDialogProps) {
     address: POOL_FACTORY_ADDRESS as `0x${string}`,
     abi: PoolFactoryABI,
     functionName: "createPool",
-    args: [
-      poolData.poolJson,
-    ],
+    args: [poolData.poolJson],
     onSuccess: (data) => {
       console.log("Successdata", data);
       setResultAddress(data.result?.toString() || "");
