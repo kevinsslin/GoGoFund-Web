@@ -121,15 +121,11 @@ function EventsIdPage() {
             <div className="flex flex-row items-center p-4">
               <div className="mr-5">
                 <p className="mb-2 text-lg font-bold">{"Withdraw Rate"}</p>
-                <CircularProgressWithLabel
-                  value={(dbEvent.currentValue / dbEvent.targetValue) * 100}
-                />
+                <CircularProgressWithLabel value={50} />
               </div>
               <div className="ml-5">
-                <p className=" mb-2 text-lg font-bold">{"Withdraw Rate"}</p>
-                <CircularProgressWithLabel
-                  value={(dbEvent.currentValue / dbEvent.targetValue) * 100}
-                />
+                <p className=" mb-2 text-lg font-bold">{"Opposition Rate"}</p>
+                <CircularProgressWithLabel value={10} />
               </div>
             </div>
             <p className="p-2 text-xl font-bold">{`Total Vault : ${dbEvent?.currency}$ ${dbEvent?.currentValue}`}</p>

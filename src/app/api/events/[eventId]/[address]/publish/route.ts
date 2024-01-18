@@ -55,7 +55,8 @@ export async function GET(
         issuer: address, // Replace with actual data
         baseURI: dbEvent.imageSrc, // Replace with actual data, if available
         startTimestamp: Math.floor(Number(dbEvent.startDate) / 1000), // Convert Date to timestamp
-        votingEndTimestamp: Math.floor(Number(dbEvent.endDate) / 1000)+ 3*24*60*60, // Replace with actual data
+        votingEndTimestamp:
+          Math.floor(Number(dbEvent.endDate) / 1000) + 3 * 24 * 60 * 60, // Replace with actual data
         endTimestamp: Math.floor(Number(dbEvent.endDate) / 1000), // Convert Date to timestamp
         targetAmount: Number(dbEvent.targetValue),
         names: nfts.map((nft) => nft.name),
