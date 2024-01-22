@@ -89,9 +89,10 @@ function FundDialog({ eventId, poolAddress, nfts }: FundDialogProps) {
   const handleSubmit = async () => {
     const getTxHash = await mint?.();
     console.log("submitting", getTxHash);
-    await fetch(`/api/events/${eventId}/transaction`, {
+    await fetch("/api/email", {
       method: "POST",
       body: JSON.stringify({
+        storeName: eventId,
         address: address?.toString(),
         items: filteredNftsAndAmounts,
       }),

@@ -53,15 +53,7 @@ function GetFondDialog({ onRefresh }: NFTDialogProps) {
   });
 
   const [poolData, setPoolData] = useState({
-    fundAsset: "", // address type
-    baseURI: "", // string type
-    startTimestamp: 0, // uint256 type, ensure this is in Unix timestamp format
-    endTimestamp: 0, // uint256 type, ensure this is in Unix timestamp format
-    targetAmount: 0, // uint256 type
-    names: [], // string[] type
-    ids: [], // uint256[] type
-    mintPrices: [], // uint256[] type
-    maxSupplys: [], // uint256[] type
+    poolJson: "",
   });
 
   // Define handleChange to update formData
@@ -95,59 +87,42 @@ function GetFondDialog({ onRefresh }: NFTDialogProps) {
         const errorData = await response.json();
         console.error("Error from API:", errorData.error);
       } else {
-        console.log("Success");
         await onRefresh();
       }
     } catch (error) {
       console.error("Error:", error);
     }
   };
-  const { config } = usePrepareContractWrite({
+  const { config, error } = usePrepareContractWrite({
     address: POOL_FACTORY_ADDRESS as `0x${string}`,
     abi: PoolFactoryABI,
     functionName: "createPool",
-    args: [
-      poolData.fundAsset,
-      poolData.baseURI,
-      poolData.startTimestamp,
-      poolData.endTimestamp,
-      poolData.targetAmount,
-      poolData.names,
-      poolData.ids,
-      poolData.mintPrices,
-      poolData.maxSupplys,
-    ],
+    args: [poolData.poolJson],
     onSuccess: (data) => {
-      console.log("Success", data);
-
+      console.log("Successdata", data);
       setResultAddress(data.result?.toString() || "");
-      console.log(resultAddress);
     },
   });
 
   const { writeAsync: publish } = useContractWrite(config);
   const handlePublish = async () => {
     try {
-      const response = await fetch(`/api/events/${eventId}/publish`);
+      const response = await fetch(`/api/events/${eventId}/${address}/publish`);
       if (!response.ok) {
         const errorData = await response.json();
         console.error("Error from API:", errorData.error);
         // Handle error: Display it in UI, etc.
       } else {
-        console.log("Success");
         const tempData = await response.json();
         setPoolData({
-          fundAsset: tempData.fundAsset,
-          baseURI: tempData.baseURI,
-          startTimestamp: tempData.startTimestamp,
-          endTimestamp: tempData.endTimestamp,
-          targetAmount: tempData.targetAmount,
-          names: tempData.names,
-          ids: tempData.ids,
-          mintPrices: tempData.mintPrices,
-          maxSupplys: tempData.maxSupplys,
+          poolJson: tempData,
         });
+        console.log(poolData);
         await publish?.();
+        if (error) {
+          console.log("error");
+          console.log(error);
+        }
         console.log("isContractSuccess");
         await fetch(`/api/myevents/${address}/${eventId}/publish`, {
           method: "PUT",

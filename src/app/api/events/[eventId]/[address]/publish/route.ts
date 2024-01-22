@@ -6,7 +6,7 @@ import { db } from "@/db";
 import { eventsTable, nftsTable } from "@/db/schema";
 import { USD_ADDRESS, NTD_ADDRESS, BTC_ADDRESS } from "@/utils/addresses";
 
-// GET /api/events/:eventId/publish
+// GET /api/events/:eventId/:address/publish
 /// get the event info for the construct conract
 export async function GET(
   req: NextRequest,
@@ -15,10 +15,11 @@ export async function GET(
   }: {
     params: {
       eventId: string;
+      address: string;
     };
   },
 ) {
-  const { eventId } = params;
+  const { eventId, address } = params;
   try {
     // Get the Event
     const dbEvent = await db.query.eventsTable.findFirst({
@@ -51,8 +52,11 @@ export async function GET(
     return NextResponse.json(
       {
         fundAsset: currencyAddress, // Replace with actual data
+        issuer: address, // Replace with actual data
         baseURI: dbEvent.imageSrc, // Replace with actual data, if available
         startTimestamp: Math.floor(Number(dbEvent.startDate) / 1000), // Convert Date to timestamp
+        votingEndTimestamp:
+          Math.floor(Number(dbEvent.endDate) / 1000) + 3 * 24 * 60 * 60, // Replace with actual data
         endTimestamp: Math.floor(Number(dbEvent.endDate) / 1000), // Convert Date to timestamp
         targetAmount: Number(dbEvent.targetValue),
         names: nfts.map((nft) => nft.name),

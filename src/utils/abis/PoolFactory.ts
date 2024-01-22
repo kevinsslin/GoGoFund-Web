@@ -47,53 +47,84 @@ export const PoolFactoryABI = [
     anonymous: false,
   },
   {
+    type: "event",
+    name: "ProtocolFeeRateSet",
+    inputs: [
+      {
+        type: "uint256",
+        name: "protocolFeeRate_",
+        indexed: false,
+        internalType: "uint256",
+      },
+    ],
+    outputs: [],
+    anonymous: false,
+  },
+  {
     type: "function",
     name: "createPool",
     inputs: [
       {
-        type: "address",
-        name: "fundAsset_",
-        internalType: "address",
-      },
-      {
-        type: "string",
-        name: "baseURI_",
-        internalType: "string",
-      },
-      {
-        type: "uint256",
-        name: "startTimestamp_",
-        internalType: "uint256",
-      },
-      {
-        type: "uint256",
-        name: "endTimestamp_",
-        internalType: "uint256",
-      },
-      {
-        type: "uint256",
-        name: "targetAmount_",
-        internalType: "uint256",
-      },
-      {
-        type: "string[]",
-        name: "names_",
-        internalType: "string[]",
-      },
-      {
-        type: "uint256[]",
-        name: "ids_",
-        internalType: "uint256[]",
-      },
-      {
-        type: "uint256[]",
-        name: "mintPrices_",
-        internalType: "uint256[]",
-      },
-      {
-        type: "uint256[]",
-        name: "maxSupplys_",
-        internalType: "uint256[]",
+        type: "tuple",
+        name: "configs",
+        components: [
+          {
+            type: "address",
+            name: "fundAsset",
+            internalType: "address",
+          },
+          {
+            type: "address",
+            name: "issuer",
+            internalType: "address",
+          },
+          {
+            type: "string",
+            name: "baseURI",
+            internalType: "string",
+          },
+          {
+            type: "uint256",
+            name: "startTimestamp",
+            internalType: "uint256",
+          },
+          {
+            type: "uint256",
+            name: "endTimestamp",
+            internalType: "uint256",
+          },
+          {
+            type: "uint256",
+            name: "votingEndTimestamp",
+            internalType: "uint256",
+          },
+          {
+            type: "uint256",
+            name: "targetAmount",
+            internalType: "uint256",
+          },
+          {
+            type: "string[]",
+            name: "names",
+            internalType: "string[]",
+          },
+          {
+            type: "uint256[]",
+            name: "ids",
+            internalType: "uint256[]",
+          },
+          {
+            type: "uint256[]",
+            name: "mintPrices",
+            internalType: "uint256[]",
+          },
+          {
+            type: "uint256[]",
+            name: "maxSupplys",
+            internalType: "uint256[]",
+          },
+        ],
+        internalType: "struct Pool.Configs",
       },
     ],
     outputs: [
@@ -120,8 +151,34 @@ export const PoolFactoryABI = [
   },
   {
     type: "function",
+    name: "protocolFeeRate",
+    inputs: [],
+    outputs: [
+      {
+        type: "uint256",
+        name: "",
+        internalType: "uint256",
+      },
+    ],
+    stateMutability: "view",
+  },
+  {
+    type: "function",
     name: "renounceOwnership",
     inputs: [],
+    outputs: [],
+    stateMutability: "nonpayable",
+  },
+  {
+    type: "function",
+    name: "setProtocolFeeRate",
+    inputs: [
+      {
+        type: "uint256",
+        name: "protocolFeeRate_",
+        internalType: "uint256",
+      },
+    ],
     outputs: [],
     stateMutability: "nonpayable",
   },
@@ -132,6 +189,19 @@ export const PoolFactoryABI = [
       {
         type: "address",
         name: "newOwner",
+        internalType: "address",
+      },
+    ],
+    outputs: [],
+    stateMutability: "nonpayable",
+  },
+  {
+    type: "function",
+    name: "withdraw",
+    inputs: [
+      {
+        type: "address",
+        name: "fundAsset_",
         internalType: "address",
       },
     ],

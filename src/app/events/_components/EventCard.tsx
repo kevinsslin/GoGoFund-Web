@@ -17,7 +17,7 @@ export type CardListProps = {
   id: string;
   name: string;
   currency: string;
-  progess: number;
+  progress: number;
   money: number;
   person: number;
   time: number;
@@ -29,7 +29,7 @@ export default function EventCard({
   id,
   name,
   currency,
-  progess,
+  progress,
   money,
   person,
   time,
@@ -71,9 +71,9 @@ export default function EventCard({
           <BorderLinearProgress
             variant="determinate"
             className="m-2"
-            value={progess > 100 ? 100 : progess}
+            value={progress > 100 ? 100 : progress}
           />
-          <p className="text-light-blue">{progess}%</p>
+          <p className="text-light-blue">{progress}%</p>
         </div>
         <div className="flex flex-row items-center justify-end pb-2">
           {isFulfilled && (

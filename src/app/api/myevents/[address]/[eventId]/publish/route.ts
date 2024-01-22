@@ -29,6 +29,7 @@ export async function PUT(
   const data = await req.json();
   try {
     const { eventAddress } = data as publishEventRequest;
+    console.log("eventAddress", eventAddress);
     // Get the User
     const dbUser = await db.query.usersTable.findFirst({
       where: eq(usersTable.walletAddress, address),

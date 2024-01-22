@@ -2,11 +2,9 @@
 
 import { useEffect, useState } from "react";
 
-import Grid from "@mui/material/Grid";
-
 import type { allEventDto } from "@/lib/types/db";
 
-import EventCard from "./_components/EventCard";
+import EventSelect from "./_components/EventSelect";
 
 function EventsPage() {
   const [dbEvents, setDbEvents] = useState<allEventDto[]>([]);
@@ -14,17 +12,15 @@ function EventsPage() {
     const fetchData = async () => {
       const response = await fetch("/api/events");
       const data = await response.json();
-      console.log(data);
-      const now = new Date().getTime();
-      setDbEvents(data.filter((e: { endDate: number }) => e.endDate > now));
+      setDbEvents(data);
     };
     fetchData();
   }, []);
 
   return (
     <main className="flex min-h-screen flex-col items-center pl-32 pr-32">
-      <div className="w-[80%]">
-        <Grid container spacing={3} direction="row" justifyContent="flex-start">
+      <div className="w-[100%]">
+        {/* <Grid container spacing={3} direction="row" justifyContent="flex-start">
           {dbEvents.map((e) => {
             // Calculate time remaining in days
             const timeRemaining =
@@ -62,7 +58,8 @@ function EventsPage() {
               </Grid>
             );
           })}
-        </Grid>
+        </Grid> */}
+        <EventSelect events={dbEvents} />
       </div>
     </main>
   );
