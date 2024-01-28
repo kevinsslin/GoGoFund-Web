@@ -2,13 +2,15 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
-First, our api key is only for demo test, so we provide in .env.example for quickly setting up.
+Get RAINBOW_PROJECT_ID and create Email to send the information to your customer who buy the product
 
-1. install by pnpm
+1. copy .env.example to .env and fill in with your personal key and account
 
-2. run the docker and migrate
+2. install by pnpm
 
-3. use pnpm run dev to start
+3. run the docker and migrate
+
+4. use pnpm run dev to start
 
 Other,
 
@@ -26,31 +28,28 @@ pnpm run dev
 
 All Events Page:
 
-查看所有發布的 events
+View all published events.
 
-點擊 event card 可以看到更詳細活動的資訊
+Click on an event card to see more detailed information about the activity.
 
-在單個 event 頁面可以投資該活動( 錢包需有錢 )
+On an individual event page, you can invest in the event (your wallet needs to have money).
 
 My Events Page:
 
-點擊右上 get fund 可以創建募資活動
+Click on 'get fund' at the top right to create a fundraising event.
 
-之後須至 my event 中編輯並發行 nft 商品，該活動才會出現至 All events page
+Then you need to edit and issue NFT products in 'my event' for the event to appear on the All Events page.
 
-在單個 event 的 page 中可以編輯標題、敘述、金額等等
+On the page of an individual event, you can edit the title, description, amount, etc.
 
 My Collection:
 
-可以查看所有參與的項目
+View all the projects you have participated in.
 
-點擊該 card 可以查看購買過的商品
+Click on a card to view the products you have purchased.
 
-左側也可以編輯個人資料
+Edit personal information on the left side, including setting your email to receive notifications about your purchases.
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-團隊分工
-b09901063 鄭鈞元 : 後端建置、api撰寫
-b10303046 林柏呈 : 區塊鏈合約撰寫、串接至前端
-b10303029 黃榆婷 : 前端頁面設計、實作前端
+

@@ -1,8 +1,6 @@
 "use client";
 
 import React from "react";
-
-import { MagicConnectConnector } from "@magiclabs/wagmi-connector";
 import { ThemeProvider } from "@material-tailwind/react";
 import {
   RainbowKitProvider,
@@ -13,7 +11,6 @@ import {
   rainbowWallet,
   walletConnectWallet,
   metaMaskWallet,
-  coreWallet,
 } from "@rainbow-me/rainbowkit/wallets";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { type Chain, configureChains, createConfig, WagmiConfig } from "wagmi";
@@ -52,30 +49,6 @@ const { chains, publicClient, webSocketPublicClient } = configureChains(
 );
 const ProjectId = publicEnv.RAINBOW_PROJECT_ID;
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const rainbowMagicConnector = ({ chains }: any) => ({
-  id: "magic",
-  name: "Magic_Email",
-  iconUrl: "https://avatars.githubusercontent.com/u/37784843?s=200&v=4",
-  iconBackground: "#fff",
-  createConnector: () => {
-    const connector = new MagicConnectConnector({
-      chains: chains,
-      options: {
-        apiKey: publicEnv.MAGIC_CONNECT_API_KEY,
-        magicSdkConfiguration: {
-          network: {
-            rpcUrl: "https://rpc.ankr.com/eth_sepolia",
-            chainId: 11155111,
-          },
-        },
-      },
-    });
-    return {
-      connector,
-    };
-  },
-});
 
 const connectors = connectorsForWallets([
   // {
