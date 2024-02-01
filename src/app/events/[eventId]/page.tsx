@@ -13,14 +13,18 @@ import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
 import NoSsr from "@mui/material/NoSsr";
 import Typography from "@mui/material/Typography";
+import { useContractRead } from "wagmi";
 
 import type { eventDetailDto } from "@/lib/types/db";
+import { PoolABI } from "@/utils/abis/Pool";
 
 import FundDialog from "./_components/FundDialog";
+import VoteDialog from "./_components/VoteDialog";
 
 function CircularProgressWithLabel(
   props: CircularProgressProps & { value: number },
 ) {
+  console.log(props.value);
   return (
     <Box sx={{ position: "relative", display: "inline-flex" }}>
       <CircularProgress
@@ -54,13 +58,19 @@ function CircularProgressWithLabel(
 function EventsIdPage() {
   const params = useParams();
   const [dbEvent, setDbEvent] = useState<eventDetailDto | null>(null);
-
+  const [withdrawRate, setWithdrawRate] = useState<number>(0);
+  const { data: oppositionRate } = useContractRead({
+    address: dbEvent?.eventAddress as `0x${string}`,
+    abi: PoolABI,
+    functionName: "firstPhaseOppose",
+  });
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch(`/api/events/${params.eventId}`);
       const data = await response.json();
       setDbEvent(data);
     };
+    setWithdrawRate(0);
     fetchData();
   }, [params.eventId]);
 
@@ -77,6 +87,13 @@ function EventsIdPage() {
     dbEvent.startDate > new Date().getTime()
       ? dbEvent.startDate
       : dbEvent.endDate;
+
+  const refreshData = async () => {
+    const response = await fetch(`/api/events/${params.eventId}`);
+    const data = await response.json();
+    setDbEvent(data);
+  };
+
   return (
     <div className="flex min-h-screen flex-col items-center">
       <div className="flex flex-row justify-center">
@@ -97,7 +114,7 @@ function EventsIdPage() {
                 value={(dbEvent.currentValue / dbEvent.targetValue) * 100}
               />
               <div className="pl-8">
-                <p className="text-md pb-2">{`Target Amount: NTD$ ${dbEvent?.targetValue}`}</p>
+                <p className="text-md pb-2">{`Target Amount: ${dbEvent?.currency}$ ${dbEvent?.targetValue}`}</p>
                 <p className="pt-2 text-xl font-bold">{`Current Amount: ${dbEvent?.currency}$ ${dbEvent?.currentValue}`}</p>
               </div>
             </div>
@@ -113,6 +130,7 @@ function EventsIdPage() {
               eventId={dbEvent.displayId}
               poolAddress={dbEvent.eventAddress}
               nfts={dbEvent.nfts}
+              onRefresh={refreshData}
             />
           </div>
         ) : (
@@ -121,19 +139,23 @@ function EventsIdPage() {
             <div className="flex flex-row items-center p-4">
               <div className="mr-5">
                 <p className="mb-2 text-lg font-bold">{"Withdraw Rate"}</p>
-                <CircularProgressWithLabel value={50} />
+                <CircularProgressWithLabel value={withdrawRate} />
               </div>
               <div className="ml-5">
                 <p className=" mb-2 text-lg font-bold">{"Opposition Rate"}</p>
-                <CircularProgressWithLabel value={10} />
+                <CircularProgressWithLabel value={Number(oppositionRate)} />
               </div>
             </div>
             <p className="p-2 text-xl font-bold">{`Total Vault : ${dbEvent?.currency}$ ${dbEvent?.currentValue}`}</p>
             <p className="text-md p-2">
-              {`duration: ${formatTimestamp(
+              {`Duration: ${formatTimestamp(
                 dbEvent.startDate,
               )} – ${formatTimestamp(dbEvent.endDate)}`}
             </p>
+            <VoteDialog
+              poolAddress={dbEvent.eventAddress}
+              onRefresh={refreshData}
+            />
           </div>
         )}
       </div>

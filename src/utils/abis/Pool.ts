@@ -2,16 +2,29 @@ export const PoolABI = [
   {
     type: "constructor",
     inputs: [
-      { name: "fundAsset_", type: "address", internalType: "address" },
-      { name: "issuer_", type: "address", internalType: "address" },
-      { name: "baseURI_", type: "string", internalType: "string" },
-      { name: "startTimestamp_", type: "uint256", internalType: "uint256" },
-      { name: "endTimestamp_", type: "uint256", internalType: "uint256" },
-      { name: "targetAmount_", type: "uint256", internalType: "uint256" },
-      { name: "names_", type: "string[]", internalType: "string[]" },
-      { name: "ids_", type: "uint256[]", internalType: "uint256[]" },
-      { name: "mintPrices_", type: "uint256[]", internalType: "uint256[]" },
-      { name: "maxSupplys_", type: "uint256[]", internalType: "uint256[]" },
+      { name: "poolFactory_", type: "address", internalType: "address" },
+      {
+        name: "configs",
+        type: "tuple",
+        internalType: "struct Pool.Configs",
+        components: [
+          { name: "fundAsset", type: "address", internalType: "address" },
+          { name: "issuer", type: "address", internalType: "address" },
+          { name: "baseURI", type: "string", internalType: "string" },
+          { name: "startTimestamp", type: "uint256", internalType: "uint256" },
+          { name: "endTimestamp", type: "uint256", internalType: "uint256" },
+          {
+            name: "votingEndTimestamp",
+            type: "uint256",
+            internalType: "uint256",
+          },
+          { name: "targetAmount", type: "uint256", internalType: "uint256" },
+          { name: "names", type: "string[]", internalType: "string[]" },
+          { name: "ids", type: "uint256[]", internalType: "uint256[]" },
+          { name: "mintPrices", type: "uint256[]", internalType: "uint256[]" },
+          { name: "maxSupplys", type: "uint256[]", internalType: "uint256[]" },
+        ],
+      },
     ],
     stateMutability: "nonpayable",
   },
@@ -37,9 +50,30 @@ export const PoolABI = [
   },
   {
     type: "function",
+    name: "donatorWithdraw",
+    inputs: [],
+    outputs: [],
+    stateMutability: "nonpayable",
+  },
+  {
+    type: "function",
     name: "endTimestamp",
     inputs: [],
     outputs: [{ name: "", type: "uint256", internalType: "uint256" }],
+    stateMutability: "view",
+  },
+  {
+    type: "function",
+    name: "firstPhaseOppose",
+    inputs: [],
+    outputs: [{ name: "", type: "uint256", internalType: "uint256" }],
+    stateMutability: "view",
+  },
+  {
+    type: "function",
+    name: "firstPhaseOpposed",
+    inputs: [],
+    outputs: [{ name: "", type: "bool", internalType: "bool" }],
     stateMutability: "view",
   },
   {
@@ -98,6 +132,13 @@ export const PoolABI = [
   },
   {
     type: "function",
+    name: "issuerWithdraw",
+    inputs: [],
+    outputs: [],
+    stateMutability: "nonpayable",
+  },
+  {
+    type: "function",
     name: "maxSupplys",
     inputs: [{ name: "", type: "uint256", internalType: "uint256" }],
     outputs: [{ name: "", type: "uint256", internalType: "uint256" }],
@@ -151,8 +192,11 @@ export const PoolABI = [
   },
   {
     type: "function",
-    name: "refund",
-    inputs: [],
+    name: "refundBatch",
+    inputs: [
+      { name: "ids_", type: "uint256[]", internalType: "uint256[]" },
+      { name: "amounts_", type: "uint256[]", internalType: "uint256[]" },
+    ],
     outputs: [],
     stateMutability: "nonpayable",
   },
@@ -181,6 +225,20 @@ export const PoolABI = [
     ],
     outputs: [],
     stateMutability: "nonpayable",
+  },
+  {
+    type: "function",
+    name: "secondPhaseOppose",
+    inputs: [],
+    outputs: [{ name: "", type: "uint256", internalType: "uint256" }],
+    stateMutability: "view",
+  },
+  {
+    type: "function",
+    name: "secondPhaseOpposed",
+    inputs: [],
+    outputs: [{ name: "", type: "bool", internalType: "bool" }],
+    stateMutability: "view",
   },
   {
     type: "function",
@@ -235,6 +293,19 @@ export const PoolABI = [
   },
   {
     type: "function",
+    name: "setVotingEndTimestamp",
+    inputs: [
+      {
+        name: "newVotingEndTimestamp_",
+        type: "uint256",
+        internalType: "uint256",
+      },
+    ],
+    outputs: [],
+    stateMutability: "nonpayable",
+  },
+  {
+    type: "function",
     name: "startTimestamp",
     inputs: [],
     outputs: [{ name: "", type: "uint256", internalType: "uint256" }],
@@ -277,17 +348,37 @@ export const PoolABI = [
   },
   {
     type: "function",
-    name: "userDepositInfo",
+    name: "userDepositAmounts",
     inputs: [{ name: "", type: "address", internalType: "address" }],
     outputs: [{ name: "", type: "uint256", internalType: "uint256" }],
     stateMutability: "view",
   },
   {
     type: "function",
-    name: "withdraw",
-    inputs: [],
+    name: "vote",
+    inputs: [
+      { name: "phase_", type: "uint8", internalType: "uint8" },
+      { name: "opposed_", type: "bool", internalType: "bool" },
+    ],
     outputs: [],
     stateMutability: "nonpayable",
+  },
+  {
+    type: "function",
+    name: "voted",
+    inputs: [
+      { name: "", type: "address", internalType: "address" },
+      { name: "", type: "uint8", internalType: "uint8" },
+    ],
+    outputs: [{ name: "", type: "bool", internalType: "bool" }],
+    stateMutability: "view",
+  },
+  {
+    type: "function",
+    name: "votingEndTimestamp",
+    inputs: [],
+    outputs: [{ name: "", type: "uint256", internalType: "uint256" }],
+    stateMutability: "view",
   },
   {
     type: "event",
@@ -306,6 +397,25 @@ export const PoolABI = [
         internalType: "address",
       },
       { name: "approved", type: "bool", indexed: false, internalType: "bool" },
+    ],
+    anonymous: false,
+  },
+  {
+    type: "event",
+    name: "DonatorWithdrawal",
+    inputs: [
+      {
+        name: "donator",
+        type: "address",
+        indexed: true,
+        internalType: "address",
+      },
+      {
+        name: "amount",
+        type: "uint256",
+        indexed: false,
+        internalType: "uint256",
+      },
     ],
     anonymous: false,
   },
@@ -368,6 +478,25 @@ export const PoolABI = [
   },
   {
     type: "event",
+    name: "IssuerWithdrawal",
+    inputs: [
+      {
+        name: "issuer_",
+        type: "address",
+        indexed: true,
+        internalType: "address",
+      },
+      {
+        name: "amount_",
+        type: "uint256",
+        indexed: false,
+        internalType: "uint256",
+      },
+    ],
+    anonymous: false,
+  },
+  {
+    type: "event",
     name: "Mint",
     inputs: [
       { name: "to_", type: "address", indexed: true, internalType: "address" },
@@ -423,7 +552,7 @@ export const PoolABI = [
   },
   {
     type: "event",
-    name: "Refund",
+    name: "RefundBatch",
     inputs: [
       {
         name: "user_",
@@ -432,10 +561,16 @@ export const PoolABI = [
         internalType: "address",
       },
       {
-        name: "amount_",
-        type: "uint256",
+        name: "ids_",
+        type: "uint256[]",
         indexed: true,
-        internalType: "uint256",
+        internalType: "uint256[]",
+      },
+      {
+        name: "amounts_",
+        type: "uint256[]",
+        indexed: true,
+        internalType: "uint256[]",
       },
     ],
     anonymous: false,
@@ -538,18 +673,33 @@ export const PoolABI = [
   },
   {
     type: "event",
-    name: "Withdraw",
+    name: "Vote",
     inputs: [
       {
-        name: "issuer_",
+        name: "user_",
         type: "address",
         indexed: true,
         internalType: "address",
       },
+      { name: "phase_", type: "uint8", indexed: true, internalType: "uint8" },
+      { name: "opposed_", type: "bool", indexed: true, internalType: "bool" },
+    ],
+    anonymous: false,
+  },
+  {
+    type: "event",
+    name: "VotingEndTimestampChanged",
+    inputs: [
       {
-        name: "amount_",
+        name: "oldVotingEndTimestamp_",
         type: "uint256",
-        indexed: false,
+        indexed: true,
+        internalType: "uint256",
+      },
+      {
+        name: "newVotingEndTimestamp_",
+        type: "uint256",
+        indexed: true,
         internalType: "uint256",
       },
     ],

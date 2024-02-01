@@ -49,18 +49,24 @@
   </head>
   <body>
     <div class="container">
-      <h1>訂單確認通知</h1>
-      <p>親愛的顧客，您來自 {{storeName}} 的訂單已成功接收並確認。</p>
-      <p>以下是您的訂單詳細資訊：</p>
+      <h1>Order Confirmation Notification</h1>
+      <p>
+        Dear {{userName}}, your order from {{storeName}} has been successfully
+        received and confirmed.
+      </p>
+      <p>Here are the details of your order:</p>
 
-      <!-- 生成的郵件內容 -->
-      <!-- 使用 JavaScript 將郵件內容插入這裡 -->
+      <!-- Generated email content -->
+      <!-- Insert email content here using JavaScript -->
 
       <ul>
         {{items}}
       </ul>
 
-      <p>感謝您的訂購與支持！期待您再次光臨。</p>
+      <p>
+        Thank you for your order and support! We look forward to serving you
+        again.
+      </p>
     </div>
   </body>
 </html>

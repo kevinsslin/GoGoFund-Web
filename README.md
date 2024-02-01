@@ -28,28 +28,28 @@ pnpm run dev
 
 All Events Page:
 
-View all published events.
+Overview: Discover all listed events. Each event card offers a snapshot of the activity, inviting users to explore further.
 
-Click on an event card to see more detailed information about the activity.
+Event Details: Clicking on an event card reveals in-depth information, providing insights into what the event entails.
 
-On an individual event page, you can invest in the event (your wallet needs to have money).
+Investment Option: If interested, users have the opportunity to invest in an event, requiring sufficient funds in their wallet.
+
+Post-Event Actions: For events that have concluded, users can check the withdrawal rate and participate in voting to support or oppose the fundraising outcome.
 
 My Events Page:
 
-Click on 'get fund' at the top right to create a fundraising event.
+Create a Fundraising Event: Initiate your fundraising journey by clicking 'get fund' located at the top right corner.
 
-Then you need to edit and issue NFT products in 'my event' for the event to appear on the All Events page.
+NFT Product Issuance: To feature your event on the All Events page, navigate to 'my event' to edit and issue NFT products, enhancing its visibility and appeal.
 
-On the page of an individual event, you can edit the title, description, amount, etc.
+Event Customization: Individual event pages allow for comprehensive customization, including title, description, and funding goals, ensuring your event resonates with potential backers.
 
 My Collection:
 
-View all the projects you have participated in.
+Project Overview: View a comprehensive list of projects you've contributed to, capturing your investment journey.
 
-Click on a card to view the products you have purchased.
+Product Exploration: Delve into specific contributions by clicking on a project card, unveiling the unique products you've acquired.
 
-Edit personal information on the left side, including setting your email to receive notifications about your purchases.
+Personalization and Notifications: Customize your profile on the left panel, including email settings to stay informed about your investments and purchases, enhancing your platform experience.
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-

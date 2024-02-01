@@ -4,7 +4,7 @@ import { eq } from "drizzle-orm";
 
 import { db } from "@/db";
 import { eventsTable, nftsTable } from "@/db/schema";
-import { USD_ADDRESS, NTD_ADDRESS, BTC_ADDRESS } from "@/utils/addresses";
+import { USD_ADDRESS, NTD_ADDRESS, TAREA_ADDRESS } from "@/utils/addresses";
 
 // GET /api/events/:eventId/:address/publish
 /// get the event info for the construct conract
@@ -41,8 +41,8 @@ export async function GET(
       case "NTD":
         currencyAddress = NTD_ADDRESS;
         break;
-      case "BTC":
-        currencyAddress = BTC_ADDRESS;
+      case "TAREA":
+        currencyAddress = TAREA_ADDRESS;
         break;
       default:
         currencyAddress = USD_ADDRESS;
