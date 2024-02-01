@@ -67,7 +67,7 @@ function MyEventsIdPage() {
           <div className="flex flex-col p-2">
             <div className="flex flex-row space-x-4">
               <p className="flex items-center justify-center text-lg">
-                目標額 {dbEvents.currency} $
+                Target Amount {dbEvents.currency} $
                 {dbEvents.status === "pending" ? (
                   <EditValue
                     eventId={eventId as string}
@@ -79,11 +79,11 @@ function MyEventsIdPage() {
               </p>
             </div>
             <p className="pt-2 text-lg">
-              已募集 {dbEvents.currency} ${dbEvents.currentValue}
+              Current Amount {dbEvents.currency} ${dbEvents.currentValue}
             </p>
           </div>
           <p className="p-2 text-lg">
-            募資期間 {startDate} – {endDate}
+            Duration: {startDate} – {endDate}
           </p>
           <NFTDialog onRefresh={refreshData} />
         </div>

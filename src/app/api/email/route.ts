@@ -25,8 +25,12 @@ const SendEmailSchema = z.object({
   address: z.string(), // User's wallet address
   items: z.array(transactionItemSchema), // Array of transaction items
 });
-function generateEmailContentHTML(storeName: string, items: items[]) {
-  // 讀取email-template.html文件的內容
+function generateEmailContentHTML(
+  userName: string,
+  storeName: string,
+  items: items[],
+) {
+  // read email-template.html content
   console.log("generateEmailContentHTML");
   const templatePath = path.join(
     process.cwd(),
@@ -39,6 +43,7 @@ function generateEmailContentHTML(storeName: string, items: items[]) {
   console.log(storeName);
   console.log(items);
   const replacedContent = templateContent
+    .replace("{{userName}}", userName)
     .replace("{{storeName}}", storeName)
     .replace("{{items}}", generateItemsList(items));
   return replacedContent;
@@ -51,7 +56,7 @@ function generateItemsList(items: items[]) {
     const { nftName, quantity, payment } = item;
     itemsList += `<li>${
       index + 1
-    }. 商品：${nftName}，數量：${quantity}，金額：${payment}元</li>`;
+    }. Goods：${nftName}，Quantity：${quantity}，Payment：${payment}</li>`;
   });
 
   itemsList += "</ul>";
@@ -111,7 +116,8 @@ export async function POST(req: NextRequest) {
 
     const subject = "Thank you for your donation";
     const to = dbUser.email;
-    const text = generateEmailContentHTML(dbStore.title, nftData);
+    const userName = dbUser.username || "Customer";
+    const text = generateEmailContentHTML(userName, dbStore.title, nftData);
     console.log(text);
 
     if (to) {

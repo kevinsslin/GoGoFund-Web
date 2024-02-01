@@ -19,9 +19,15 @@ type FundDialogProps = {
   eventId: string;
   poolAddress: string;
   nfts: nft[];
+  onRefresh: () => Promise<void>;
 };
 
-function FundDialog({ eventId, poolAddress, nfts }: FundDialogProps) {
+function FundDialog({
+  eventId,
+  poolAddress,
+  nfts,
+  onRefresh,
+}: FundDialogProps) {
   const [open, setOpen] = useState(false);
   const [openSuccess, setOpensuccess] = useState(false);
   const { address } = useAccount();
@@ -97,6 +103,15 @@ function FundDialog({ eventId, poolAddress, nfts }: FundDialogProps) {
         items: filteredNftsAndAmounts,
       }),
     });
+    await fetch(`/api/events/${eventId}/transaction`, {
+      method: "POST",
+      body: JSON.stringify({
+        address: address?.toString(),
+        items: filteredNftsAndAmounts,
+      }),
+    });
+    await onRefresh();
+
     setOpensuccess(true);
     handleClose();
   };

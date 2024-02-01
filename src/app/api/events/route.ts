@@ -15,7 +15,7 @@ const postEventRequestSchema = z.object({
   startDate: z.number(),
   endDate: z.number(),
   targetValue: z.number().min(0),
-  currency: z.enum(["USD", "BTC", "NTD"]),
+  currency: z.enum(["USD", "TAREA", "NTD"]),
   //   image: z.instanceof(File),
 });
 // you can use z.infer to get the typescript type from a zod schema

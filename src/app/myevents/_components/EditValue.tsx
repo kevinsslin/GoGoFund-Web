@@ -51,7 +51,7 @@ function EditValue({ eventTargetValue, eventId }: Props) {
       ) : (
         <button
           onClick={() => setEditingValue(true)}
-          className="w-[50%] rounded-md p-2 hover:bg-white/10"
+          className="rounded-md p-2 hover:bg-white/10"
         >
           <Typography className="break-all text-start text-lg">
             {currentValue != null ? currentValue : eventTargetValue}

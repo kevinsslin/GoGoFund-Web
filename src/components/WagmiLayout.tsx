@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+
 import { ThemeProvider } from "@material-tailwind/react";
 import {
   RainbowKitProvider,
@@ -25,19 +26,19 @@ import Navbar from "./Navbar";
 
 const AreonChain: Chain = {
   id: 462, // The chain ID of your custom chain
-  name: 'Areon Network Testnet',
-  network: 'Areon Network Testnet',
+  name: "Areon Network Testnet",
+  network: "Areon Network Testnet",
   nativeCurrency: {
-    name: 'Areon',
-    symbol: 'TAREA',
+    name: "Areon",
+    symbol: "TAREA",
     decimals: 18,
   },
   rpcUrls: {
     public: {
-      http: ['https://testnet-rpc.areon.network'],
+      http: ["https://testnet-rpc.areon.network"],
     },
     default: {
-      http: ['https://testnet-rpc.areon.network'],
+      http: ["https://testnet-rpc.areon.network"],
     },
   },
   testnet: true,
@@ -49,7 +50,6 @@ const { chains, publicClient, webSocketPublicClient } = configureChains(
 );
 const ProjectId = publicEnv.RAINBOW_PROJECT_ID;
 
-
 const connectors = connectorsForWallets([
   // {
   //   groupName: "Email",
@@ -57,9 +57,7 @@ const connectors = connectorsForWallets([
   // },
   {
     groupName: "recommanded",
-    wallets: [
-      metaMaskWallet({ projectId: ProjectId, chains }),
-    ],
+    wallets: [metaMaskWallet({ projectId: ProjectId, chains })],
   },
   {
     groupName: "others",

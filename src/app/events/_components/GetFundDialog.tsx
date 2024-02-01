@@ -215,8 +215,8 @@ function GetFundDialog() {
             <MenuItem value="USD">
               <em>USD</em>
             </MenuItem>
-            <MenuItem value="BTC">
-              <em>BTC</em>
+            <MenuItem value="TAREA">
+              <em>TAREA</em>
             </MenuItem>
           </TextField>
           <form onSubmit={handleSubmit} className="flex justify-center">

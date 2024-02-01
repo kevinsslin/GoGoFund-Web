@@ -13,7 +13,7 @@ const updateEventRequestSchema = z.object({
   startDate: z.number().optional(),
   endDate: z.number().optional(),
   targetValue: z.number().optional(),
-  currency: z.enum(["USD", "BTC", "NTD"]).optional(),
+  currency: z.enum(["USD", "TAREA", "NTD"]).optional(),
 });
 type updateEventRequest = z.infer<typeof updateEventRequestSchema>;
 
