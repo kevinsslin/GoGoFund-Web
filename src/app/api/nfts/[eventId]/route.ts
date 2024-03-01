@@ -71,7 +71,7 @@ export async function POST(
         description,
         name,
         price,
-        imageSrc,
+        imageSrc:`ipfs://${imageSrc}`,
         nowAmount: 0,
         totalAmount,
       })

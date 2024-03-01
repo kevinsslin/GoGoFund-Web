@@ -2,7 +2,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
-Get RAINBOW_PROJECT_ID and create Email to send the information to your customer who buy the product
+Get WALLETCONNECT_PROJECT_ID and create Email to send the information to your customer who buy the product
 
 1. copy .env.example to .env and fill in with your personal key and account
 

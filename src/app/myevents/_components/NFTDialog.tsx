@@ -1,8 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import React from "react";
-
+import React, { useState, useRef } from "react";
+import Image from "next/image";
 import { useParams } from "next/navigation";
 
 import { DialogTitle } from "@mui/material";
@@ -35,8 +34,40 @@ function GetFondDialog({ onRefresh }: NFTDialogProps) {
   const { address } = useAccount();
   const { eventId } = useParams();
   const [resultAddress, setResultAddress] = useState("");
+  const [cid, setCid] = useState("");
+  const [uploading, setUploading] = useState(false);
   const handleClickOpen = () => {
     setOpen(true);
+  };
+  const inputFile = useRef(null);
+  const uploadFile = async (fileToUpload: File) => {
+    try {
+      setUploading(true);
+      const data = new FormData();
+      data.set("file", fileToUpload);
+      const res = await fetch("/api/pinata", {
+        method: "POST",
+        body: data,
+      });
+      const resData = await res.json();
+      console.log(resData);
+      setCid(resData.IpfsHash);
+      setFormData((prevState) => ({
+        ...prevState,
+        imageSrc: resData.IpfsHash,
+      }));
+      setUploading(false);
+    } catch (e) {
+      console.log(e);
+      setUploading(false);
+      alert("Trouble uploading file");
+    }
+  };
+  const handlePhotoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files.length > 0) {
+      uploadFile(e.target.files[0]);
+    }
+
   };
 
   const handleClose = () => {
@@ -98,7 +129,8 @@ function GetFondDialog({ onRefresh }: NFTDialogProps) {
     abi: PoolFactoryABI,
     functionName: "createPool",
     args: [poolData.poolJson],
-    onSuccess: (data) => {
+    //eslint-disable-next-line
+    onSuccess: (data: any) => {
       console.log("Successdata", data);
       setResultAddress(data.result?.toString() || "");
     },
@@ -120,10 +152,8 @@ function GetFondDialog({ onRefresh }: NFTDialogProps) {
         console.log(poolData);
         await publish?.();
         if (error) {
-          console.log("error");
-          console.log(error);
+          console.log("error", error);
         }
-        console.log("isContractSuccess");
         await fetch(`/api/myevents/${address}/${eventId}/publish`, {
           method: "PUT",
           body: JSON.stringify({ eventAddress: resultAddress }),
@@ -208,8 +238,37 @@ function GetFondDialog({ onRefresh }: NFTDialogProps) {
             required
             className="pb-2"
           />
+          <div className="flex items-center space-x-2">
+            <input
+              type="file"
+              id="file"
+              ref={inputFile}
+              className="text-gray-900 file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100 block w-full text-sm file:mr-4 file:rounded-md file:border-0 file:px-4 file:py-2 file:text-sm file:font-semibold"
+              onChange={handlePhotoChange}
+            />
+          </div>
+
+          {/* Submit button */}
+          <button
+            type="submit"
+            disabled={uploading}
+            className="bg-indigo-600 text-black hover:bg-indigo-700 focus:ring-indigo-500 disabled:bg-indigo-300 mt-4 inline-flex justify-center rounded-md border border-transparent px-4 py-2 text-sm font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2"
+          >
+            {uploading ? "Uploading..." : "Upload"}
+          </button>
+
+          {cid && (
+            <Image
+              src={`https://cloudflare-ipfs.com/ipfs/${cid}`}
+              alt="Image from IPFS"
+              className="mt-4 object-cover"
+              width={200}
+              height={200}
+            />
+          )}
           <form onSubmit={handleSubmit} className="flex justify-center">
-            <Button type="submit" onClick={handleClose}>
+            <Button type="submit" onClick={handleClose}
+            disabled={cid==="" || cid===undefined}>
               Submit
             </Button>
           </form>

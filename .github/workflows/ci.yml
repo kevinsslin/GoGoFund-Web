@@ -9,7 +9,7 @@ on:
 env:
   POSTGRES_URL: ${{ secrets.POSTGRES_URL }}
   MAGIC_CONNECT_API_KEY: ${{ secrets.MAGIC_CONNECT_API_KEY }}
-  RAINBOW_PROJECT_ID: ${{ secrets.RAINBOW_PROJECT_ID }}
+  WALLETCONNECT_PROJECT_ID: ${{ secrets.WALLETCONNECT_PROJECT_ID }}
 
 jobs:
   lint:

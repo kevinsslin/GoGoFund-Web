@@ -48,7 +48,7 @@ const { chains, publicClient, webSocketPublicClient } = configureChains(
   [AreonChain],
   [publicProvider()],
 );
-const ProjectId = publicEnv.RAINBOW_PROJECT_ID;
+const ProjectId = publicEnv.WALLETCONNECT_PROJECT_ID;
 
 const connectors = connectorsForWallets([
   // {
